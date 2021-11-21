@@ -7,24 +7,25 @@ contract Mobisale {
     struct User {
         uint256 serial;
         uint256 balance;
+        string email;
         string username;
-        string name;
         address payable paymentAccount;
     }
 
     mapping(uint256 => User) public users;
 
     function createUser(
+     
+        string memory _email,
         string memory _username,
-        string memory _name,
         address payable _paymentAccount
     ) public {
         userCount++;
         users[userCount] = User(
             userCount,
             0,
+            _email,
             _username,
-            _name,
             _paymentAccount
         );
     }

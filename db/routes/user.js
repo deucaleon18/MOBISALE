@@ -47,7 +47,9 @@ router.post("/register", async (req, res, next) => {
       new User({
         username: req.body.username,
         password: hash,
-        name: req.body.name,
+        email: req.body.email,
+        paymentAccount:req.body.paymentAccount,
+        imageHash:req.body.imageHash
       })
         .save()
         .then((user) => {

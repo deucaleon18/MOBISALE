@@ -12,6 +12,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { makeStyles } from "@mui/styles";
+
 
 const Login = () => {
   const handleSubmit = async (event) => {
@@ -21,27 +23,46 @@ const Login = () => {
     // eslint-disable-next-line no-console
 
     await axios
-      .post("http:localhost:5000/login", {
-        email: data.get("email"),
+      .post("http://localhost:5000/login", {
+        username: data.get("username"),
         password: data.get("password"),
       })
       .then((res) => {
         console.log(res);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("username", res.data.user.username);
+        localStorage.setItem("email", res.data.user.email);
+
+      })
+      .then(()=>{
+     window.location.href = "/app";
       })
       .catch((err) => {
         console.log(err);
       });
 
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+   
   };
+
+
+  const styles = makeStyles((theme) => ({
+    multilineColor: {
+      color: "#fff",
+    },
+  }));
+
+   const classes = styles();
+
   return (
     <div>
-      <Container sx={{ marginTop: 24 }} component="main" maxWidth="xs">
+      <Container
+        sx={{ marginTop: 24, border: 1, borderColor: "#fff", borderRadius: 5 }}
+        component="main"
+        maxWidth="xs"
+      >
         <CssBaseline />
         <Box
+          color="white"
           sx={{
             marginTop: 8,
             display: "flex",
@@ -49,7 +70,7 @@ const Login = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1 }} color="secondary">
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -62,16 +83,28 @@ const Login = () => {
             sx={{ mt: 1 }}
           >
             <TextField
+              InputProps={{
+                classes: {
+                  input: classes.multilineColor,
+                },
+              }}
+              color="secondary"
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
+              id="username"
+              label="Username"
+              name="username"
               autoComplete="email"
               autoFocus
             />
             <TextField
+              InputProps={{
+                classes: {
+                  input: classes.multilineColor,
+                },
+              }}
+              color="secondary"
               margin="normal"
               required
               fullWidth
@@ -82,10 +115,11 @@ const Login = () => {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox value="remember" color="secondary" />}
               label="Remember me"
             />
             <Button
+              color="secondary"
               type="submit"
               fullWidth
               variant="contained"
