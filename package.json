@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "prettier": "^2.4.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.19"
+   
+
+  },
+   "lint": "prettier --list-different 'contracts/**/*.sol'"
+}
