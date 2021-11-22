@@ -6,6 +6,7 @@ import Register from "./pages/Register/Register";
 import UserDetails from "./pages/UserDetails/UserDetails";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
 import NewPost from "./pages/NewPost/NewPost";
+import SinglePost from './pages/SinglePost/SinglePost';
 
 const Routing = () => {
     return (
@@ -23,9 +24,19 @@ const Routing = () => {
 
             <Route exact path="/register" element={<Register />}></Route>
 
-            <Route exact path="/accounts/:username" element={<UserDetails />}></Route>
+            <Route
+              exact
+              path="/accounts/:username"
+              element={<UserDetails />}
+            ></Route>
+            <Route
+              exact
+              path="/posts/:id"
+              element={<SinglePost/>}
+            ></Route>
+            
             {localStorage.getItem("token") ? (
-              <Route exact path="/app" element={<MarketPlace/>}></Route>
+              <Route exact path="/app" element={<MarketPlace />}></Route>
             ) : (
               <Route exact path="/app" element={<Login />}></Route>
             )}

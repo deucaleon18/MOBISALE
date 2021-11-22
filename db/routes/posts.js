@@ -18,13 +18,14 @@ router.use(function (req, res, next) {
 });
 
 
+
+
 router.post("/create",async(req,res,next)=>{
   await new Post({
       username:req.body.username,
       postTitle:req.body.postTitle,
       postDescription:req.body.postDescription,
-      // features:req.body.features,
-      postImageHash:req.body.imageHash,
+      postImageHash:req.body.postImageHash,
       cost:req.body.cost
   })
   .save()
@@ -41,11 +42,15 @@ router.post("/create",async(req,res,next)=>{
 })
 
 
+
+
+
+
 router.post("/sell/:id",async(req,res,next)=>{
   await Post.findByIdAndUpdate(req.params.id,{sold:true})
   .then(async(res)=>{
     console.log(res)
-      await User.findOne({ username: req.body.username }).
+      await User.findOne({ username: req.params.username }).
       then(async(user)=>{
         console.log(user)
         console.log(user.purchasedPosts)
@@ -53,7 +58,7 @@ router.post("/sell/:id",async(req,res,next)=>{
         let newPurchases=user.purchasedPosts
         newPurchases.push({post:req.params.id})
         console.log(newPurchases)
-        await User.findOneAndUpdate({ username: req.body.username },{purchasedPosts:newPurchases})
+        await User.findOneAndUpdate({ username: req.params.username },{purchasedPosts:newPurchases})
         .then((res)=>{
           console.log(res)
         })
@@ -64,6 +69,9 @@ router.post("/sell/:id",async(req,res,next)=>{
   .catch((err)=>{console.log(err)})
  
 })
+
+
+
 
 
 
@@ -78,7 +86,16 @@ router.get("/",async(req,res,next)=>{
     })
 })
 
-
+router.get("/:id", async (req, res, next) => {
+  await Post.findOne({_id:req.params.id})
+    .then((posts) => {
+      console.log(posts);
+      return res.json({ posts: posts });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 router.get("/:username",async(req,res,next)=>{
 

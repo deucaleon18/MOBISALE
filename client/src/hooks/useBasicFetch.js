@@ -7,7 +7,7 @@ const useBasicFetch = () => {
      const [contract, setContract] = useState(undefined);
      const [account, setAccount] = useState(undefined);
      const [web3, setWeb3] = useState(undefined);
-
+     const [contractLoading, setContractLoading] = useState(true);
    useEffect(() => {
      const getBasicDetails = async () => {
        try {
@@ -28,6 +28,7 @@ const useBasicFetch = () => {
          setWeb3(web3);
          setAccount(accounts[0]);
          setContract(instance);
+         setContractLoading(false);
        } catch (error) {
          // Catch any errors for any of the above operations.
          alert(
@@ -41,7 +42,7 @@ const useBasicFetch = () => {
    }, []);
 
 
-   return[web3,account,contract]
+   return[web3,account,contract,contractLoading]
 }
 
 export default useBasicFetch

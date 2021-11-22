@@ -2,17 +2,17 @@
 pragma solidity >=0.4.21 <0.7.0;
 
 contract Mobisale {
-    uint256 public userCount = 0;
+    uint public userCount = 0;
 
     struct User {
-        uint256 serial;
-        uint256 balance;
+        uint serial;
+        uint balance;
         string email;
         string username;
         address payable paymentAccount;
     }
 
-    mapping(uint256 => User) public users;
+    mapping(uint=> User) public users;
 
     function createUser(
      
@@ -30,11 +30,27 @@ contract Mobisale {
         );
     }
 
-    function buyPost(uint256 userSerial, uint256 amount) public payable {
-        users[userSerial].balance += amount / 1000000000000000000;
-    }
+    function buyPost(string memory _username,uint amount) public payable {
 
-    function redeemBalance(uint256 userSerial) payable public {
-        (users[userSerial].paymentAccount).transfer(users[userSerial].balance);
+        for(uint i=1;i<=userCount;i++){
+            if(keccak256(bytes(users[i].username))==keccak256(bytes(_username))){
+                 users[i].balance += (amount*9 )/ 10000000000000000000;
+            }
+        }
     }
+    
+    function redeemBalance(string memory _username) public  payable {
+        
+        for(uint i=1;i<=userCount;i++){
+            if(keccak256(bytes(users[i].username))==keccak256(bytes(_username))){
+                users[i].paymentAccount.transfer(users[i].balance);
+            }
+        }
+       
+    }
+ 
+ function getContractBalance() external view returns(uint){
+  return address(this).balance;
+ }
+
 }

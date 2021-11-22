@@ -43,14 +43,13 @@ passport.use(
 passport.use(
   new JWTStrategy(
     {
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJWT.fromUrlQueryParameter('token'),
       secretOrKey: "your_jwt_secret",
     },
-    async(jwtPayload, cb) =>{
-     
-      console.log(jwtPayload._id)
+    async (jwtPayload, cb) => {
+      console.log(jwtPayload._id);
       //find the user in db if needed
-      await User.find({_id:jwtPayload._id})
+      await User.find({ _id: jwtPayload._id })
         .then((user) => {
           return cb(null, user);
         })

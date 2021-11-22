@@ -18,10 +18,9 @@ const postSchema=new mongoose.Schema({
       required:true
   },
 //   features:[{type:String}],
-
   postImageHash:{
       type:String,
-      
+      required:true
   },
   sold:{
       type:Boolean,

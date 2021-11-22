@@ -14,7 +14,7 @@ import axios from "axios";
 
 
 const client = create("https://ipfs.infura.io:5001/api/v0");
-const header = `Authorization:Bearer ${localStorage.getItem("token")}`;
+
 const NewPost = () => {
      
     
@@ -26,17 +26,19 @@ const NewPost = () => {
        .add(buffer)
        .then(async (res) => {
          console.log(res.path);
-         console.log(header)
          // eslint-disable-next-line no-console
          await axios
-           .post("http://localhost:5000/posts/create", {
+           .post("http://localhost:5000/posts/create/", {
              username: localStorage.getItem("username"),
              postTitle: title,
              postDescription: description,
              postImageHash: res.path,
              paymentAccount: localStorage.getItem("paymentAccount"),
-             cost:cost
-           },{headers:`Authorization:Bearer ${localStorage.getItem("token")}`})
+             cost: cost,
+           }
+           ,{params: {
+          token:localStorage.getItem("token"),
+         }})
 
            .then((res) => {
              console.log(res);
