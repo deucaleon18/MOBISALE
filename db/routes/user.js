@@ -4,13 +4,11 @@ const router = express.Router();
 
 const User = require("./../models/User");
 
-
-
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
-
+require("../auth/passport");
 
 const bodyParser = require("body-parser");
 router.use(bodyParser.json());
@@ -96,6 +94,15 @@ router.post("/login", (req, res, next) => {
   })(req, res);
 });
 
-
+router.get("/users/:username",passport.authenticate('jwt',{session:false}),async(req,res,next)=>{
+await User.findOne({username:req.params.username}).populate('purchasedPosts.post')
+.then((user)=>{
+  console.log(user)
+ return res.json({user:user})
+})
+.catch((err)=>{
+  console.log(err)
+})
+})
 
 module.exports = router;

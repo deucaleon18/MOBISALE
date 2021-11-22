@@ -23,7 +23,7 @@ const Routing = () => {
 
             <Route exact path="/register" element={<Register />}></Route>
 
-            <Route exact path="/accounts" element={<UserDetails />}></Route>
+            <Route exact path="/accounts/:username" element={<UserDetails />}></Route>
             {localStorage.getItem("token") ? (
               <Route exact path="/app" element={<MarketPlace/>}></Route>
             ) : (

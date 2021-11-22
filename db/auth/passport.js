@@ -46,9 +46,11 @@ passport.use(
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey: "your_jwt_secret",
     },
-    function (jwtPayload, cb) {
+    async(jwtPayload, cb) =>{
+     
+      console.log(jwtPayload._id)
       //find the user in db if needed
-      return UserModel.findOneById(jwtPayload.id)
+      await User.find({_id:jwtPayload._id})
         .then((user) => {
           return cb(null, user);
         })

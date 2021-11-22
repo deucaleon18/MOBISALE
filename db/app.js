@@ -25,6 +25,8 @@ app.use(function (req, res, next) {
 const mongoose=require("mongoose")
 const PORT=process.env.PORT || 5000
 const authRoute=require("./routes/user")
+const postRoute=require("./routes/posts")
+
 const homeRoute=express.Router()
 require("./auth/passport");
 
@@ -57,6 +59,7 @@ app.use("/home",
 // passport.authenticate('jwt',{session:false}),
 homeRoute)
 
+app.use("/posts",passport.authenticate('jwt',{session:false}),postRoute)
 //Starting the server 
 app.listen(PORT,()=>{
     console.log(`Successfully connected to PORT ${PORT}`)
