@@ -17,14 +17,15 @@ router.use(function (req, res, next) {
   next();
 });
 
+
 router.post("/create",async(req,res,next)=>{
   await new Post({
       username:req.body.username,
-      userSerial:req.body.userSerial,
       postTitle:req.body.postTitle,
       postDescription:req.body.postDescription,
-      features:req.body.features,
-      postImageHash:req.body.imageHash
+      // features:req.body.features,
+      postImageHash:req.body.imageHash,
+      cost:req.body.cost
   })
   .save()
   .then((posts)=>{

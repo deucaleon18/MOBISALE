@@ -5,10 +5,10 @@ const postSchema=new mongoose.Schema({
       type:String,
       required:true
   },
-  userSerial:{
-      type:Number,
-      required:true
-  },
+//   userSerial:{
+//       type:Number,
+//       required:true
+//   },
   postTitle:{
       type:String,
       required:true
@@ -17,7 +17,7 @@ const postSchema=new mongoose.Schema({
       type:String,
       required:true
   },
-  features:[{type:String}],
+//   features:[{type:String}],
 
   postImageHash:{
       type:String,
@@ -26,6 +26,10 @@ const postSchema=new mongoose.Schema({
   sold:{
       type:Boolean,
       default:false
+  },
+  cost:{
+      type:Number,
+      required:true
   }
 
 })

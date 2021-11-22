@@ -32,6 +32,7 @@ const Login = () => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("username", res.data.user.username);
         localStorage.setItem("email", res.data.user.email);
+        localStorage.setItem("paymentAccount", res.data.user.paymentAccount);
 
       })
       .then(()=>{
@@ -56,7 +57,7 @@ const Login = () => {
   return (
     <div>
       <Container
-        sx={{ marginTop: 24, border: 1, borderColor: "#fff", borderRadius: 5 }}
+        sx={{ marginTop: 24, borderRadius: 5 }}
         component="main"
         maxWidth="xs"
       >

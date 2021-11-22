@@ -38,8 +38,6 @@ const Register = () => {
 
 
 
-
-
   const Input = styled("input")({
     display: "none",
   });
@@ -66,6 +64,7 @@ const Register = () => {
                 localStorage.setItem("token",res.data.token)
                 localStorage.setItem("username",res.data.user.username)
                 localStorage.setItem("email",res.data.user.email)
+                localStorage.setItem("paymentAccount", res.data.user.paymentAccount);
               })
               .then(()=>{
                 window.location.href="/app"
@@ -84,7 +83,7 @@ const Register = () => {
    const classes = styles();
   return (
     <Container
-      sx={{ marginTop: 16, border: 1, borderColor: "#fff", borderRadius: 5 }}
+      sx={{ marginTop: 16, borderRadius: 5 }}
       component="main"
       maxWidth="xs"
     >
@@ -129,6 +128,9 @@ const Register = () => {
               Upload Image
             </Button>
           </label>
+
+
+
         </Stack>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2} color="white">

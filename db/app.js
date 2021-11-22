@@ -27,6 +27,8 @@ const PORT=process.env.PORT || 5000
 const authRoute=require("./routes/user")
 const postRoute=require("./routes/posts")
 
+
+
 const homeRoute=express.Router()
 require("./auth/passport");
 
