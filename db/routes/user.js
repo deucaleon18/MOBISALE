@@ -94,6 +94,8 @@ router.post("/login", (req, res, next) => {
   })(req, res);
 });
 
+
+//get user details route
 router.get("/users/:username",passport.authenticate('jwt',{session:false}),async(req,res,next)=>{
 await User.findOne({username:req.params.username}).populate('purchasedPosts.post')
 .then((user)=>{

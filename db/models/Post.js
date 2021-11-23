@@ -1,5 +1,7 @@
 const mongoose=require("mongoose")
 
+//Post model 
+
 const postSchema=new mongoose.Schema({
   username:{
       type:String,

@@ -1,6 +1,6 @@
 const mongoose=require("mongoose")
 
-
+//User model
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   },
  imageHash:{
    type:String,
-   required:true
+   required:false
  },
  paymentAccount:{
    type:String,

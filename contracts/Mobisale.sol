@@ -3,7 +3,9 @@ pragma solidity >=0.4.21 <0.7.0;
 
 contract Mobisale {
     uint public userCount = 0;
+   
 
+   //user struct for registered users
     struct User {
         uint serial;
         uint balance;
@@ -12,8 +14,11 @@ contract Mobisale {
         address payable paymentAccount;
     }
 
+
+  //users mapping 
     mapping(uint=> User) public users;
 
+//creating new user on registeration 
     function createUser(
      
         string memory _email,
@@ -30,6 +35,7 @@ contract Mobisale {
         );
     }
 
+//function to increase virtual balance of the post creator
     function buyPost(string memory _username,uint amount) public payable {
 
         for(uint i=1;i<=userCount;i++){
@@ -38,7 +44,9 @@ contract Mobisale {
             }
         }
     }
-    
+
+
+//function to redeem the balance earned by the creator 
     function redeemBalance(string memory _username) public  payable {
         
         for(uint i=1;i<=userCount;i++){
@@ -50,7 +58,8 @@ contract Mobisale {
         }
        
     }
-   
+
+// function to display the creator's balance
    function returnUserBalance(string memory _username) public view returns(uint){
          for(uint i=1;i<=userCount;i++){
             if(keccak256(bytes(users[i].username))==keccak256(bytes(_username))){
@@ -59,7 +68,8 @@ contract Mobisale {
         }
        
     }
-   
+
+//function to get contract balance  
  function getContractBalance() external view returns(uint){
   return address(this).balance;
  }

@@ -21,6 +21,8 @@ import useBasicFetch from "../../hooks/useBasicFetch";
 
 const client = create("https://ipfs.infura.io:5001/api/v0");
 
+//basic register form that logs data first to the blockchain and then to the node js backend
+
 
 const Register = () => {
  const [web3,account,contract] = useBasicFetch();
@@ -32,7 +34,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password,setPassword]=useState("")
   const [paymentAccount,setPaymentAccount]=useState("")
-
+  const [imageHash,setImageHash]=useState("")
   
   const styles = makeStyles((theme) => ({
     multilineColor: {
@@ -52,12 +54,13 @@ const Register = () => {
       .add(buffer)
       .then(async (res) => {
         console.log(res.path)
-   
+        setImageHash(res.path);
             await contract.methods
               .createUser(email, username, paymentAccount)
               .send({ from: account })
               .then(async(res) => {
                 console.log(res);
+                
                 // eslint-disable-next-line no-console
                 await axios
                   .post("http://localhost:5000/register/", {
@@ -65,7 +68,7 @@ const Register = () => {
                     email,
                     password,
                     paymentAccount,
-                    imageHash: res.path,
+                    imageHash
                   })
                   .then((res) => {
                     console.log(res);
@@ -231,7 +234,7 @@ const Register = () => {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link style={{ color: "white" }} href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

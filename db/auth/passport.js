@@ -7,6 +7,10 @@ const passportJWT = require("passport-jwt");
 const ExtractJWT = passportJWT.ExtractJwt;
 const JWTStrategy = passportJWT.Strategy;
 
+
+//all the auth logic is present in this file most of it is directly available code on internet 
+
+
 passport.use(
   new LocalStrategy(
     {

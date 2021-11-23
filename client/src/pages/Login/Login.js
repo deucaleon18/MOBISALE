@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@mui/styles";
 
+//basic login form that verifies using passport local authentication using node js backend 
 
 const Login = () => {
   const handleSubmit = async (event) => {
@@ -121,13 +122,17 @@ const Login = () => {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
+              <Grid  item xs>
+                <Link style={{ color: "white" }} href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="register" variant="body2">
+                <Link
+                  style={{ color: "white" }}
+                  href="register"
+                  variant="body2"
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

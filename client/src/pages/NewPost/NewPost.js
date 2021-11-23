@@ -1,25 +1,36 @@
 import { Button, Container } from '@mui/material'
 import React,{useState,useEffect} from 'react'
 
+//material ui components import 
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import { styles } from "./NewPostStyle";
-import IconButton from "@mui/material/IconButton";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+
+
+
+//IFPS client import 
 import { create } from "ipfs-http-client";
+
+
+//axios import 
 import axios from "axios";
 
 
+
+//the images for this application are stored on the IFPS client server 
 const client = create("https://ipfs.infura.io:5001/api/v0");
 
+
+
+//component to create a new post 
 const NewPost = () => {
      
     
 
-
+//function to submit post on successful creation the post is submitted to the backend and added to the mongoDB database
    const submitPost = async (event) => {
      event.preventDefault();
      await client
@@ -50,7 +61,6 @@ const NewPost = () => {
              console.log(err);
            });
        })
-
        .catch((err) => {
          console.log(err);
        });
@@ -62,7 +72,7 @@ const NewPost = () => {
 
 
 
-
+//usestate components for usage
     const [postImage,setPostImage]=useState(undefined)
     const [postImageUrl,setPostImageUrl]=useState(undefined)
     const [buffer,setBuffer]=useState(undefined)
@@ -75,16 +85,11 @@ const NewPost = () => {
 
 
 
-  useEffect(() => {
-    console.log(postImageUrl);
-  }, [postImageUrl]);
-
-
-
-
-
-
+//usestyles hook mui 
       const classes=styles()
+
+
+
       const Input = styled("input")({
         display: "none",
       });
@@ -113,19 +118,16 @@ const NewPost = () => {
                     justifyContent: "center",
                   }}
                 >
-                  {/* {console.log(postImageUrl)}
-                  {typeof postImage === undefined ? ( */}
+               
                   <img
                     src={postImageUrl}
                     style={{ maxWidth: "100%" }}
                     alt=""
                   ></img>
-                  {/* ) : ( */}
-                  {/* <IconButton color="secondary">
-                      <AddAPhotoIcon size="large"></AddAPhotoIcon>
-                    </IconButton>
-                  )} */}
+                
                 </div>
+ 
+{/* basic form with image and normal input fields */}
 
                 <label htmlFor="contained-button-file">
                   <Input
@@ -145,6 +147,8 @@ const NewPost = () => {
                       setPostImageUrl(URL.createObjectURL(e.target.files[0]));
                     }}
                   />
+
+                  {/* on click the image is converted to a url and displayed  */}
                   <Button
                     variant="contained"
                     color="secondary"
@@ -227,6 +231,8 @@ const NewPost = () => {
                 items
                 style={{ display: "flex", justifyContent: "center" }}
               >
+{/* 
+                on submit all the data is registered to the backend in the Post model */}
                 <Button
                   style={{ backgroundColor: "#0085f1", color: "white" }}
                   onClick={submitPost}

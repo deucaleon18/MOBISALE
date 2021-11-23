@@ -19,7 +19,7 @@ router.use(function (req, res, next) {
 
 
 
-
+//route to create new post 
 router.post("/create",async(req,res,next)=>{
   await new Post({
       username:req.body.username,
@@ -45,7 +45,7 @@ router.post("/create",async(req,res,next)=>{
 
 
 
-
+//route to sell a post with id parameter this basically adds the post to purchased posts of user and makes the post boolean sold to true 
 router.post("/sell/:id",async(req,res,next)=>{
   await Post.findByIdAndUpdate(req.params.id,{sold:true})
   .then(async(res)=>{
@@ -74,7 +74,7 @@ router.post("/sell/:id",async(req,res,next)=>{
 
 
 
-
+// to get all posts 
 router.get("/",async(req,res,next)=>{
   await Post.find({sold:false})
   .then((posts)=>{
@@ -86,6 +86,7 @@ router.get("/",async(req,res,next)=>{
     })
 })
 
+//get particular post :id
 router.get("/:id", async (req, res, next) => {
   await Post.findOne({_id:req.params.id})
     .then((posts) => {
@@ -97,6 +98,7 @@ router.get("/:id", async (req, res, next) => {
     });
 });
 
+//get posts made by this user
 router.get("/:username",async(req,res,next)=>{
 
   await Post.find({username:req.params.username})

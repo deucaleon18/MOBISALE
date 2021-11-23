@@ -25,6 +25,9 @@ const UserDetails = () => {
 
     console.log(username.username)
 
+//function to get all the user details mainly from the backend and get the user balance from the solidity contract 
+
+
     const getUserDetails=async()=>{
       await axios.get(`/users/${username.username}`, {
         params: {
@@ -55,9 +58,11 @@ const UserDetails = () => {
     getUserDetails()
   },[])
  
-//  useEffect(()=>{
 
-//  })
+
+//function to redeem balance fires the solidity function to transfer the balance to the respective ganache account 
+
+
 
   const redeemBalance=async(e)=>{
     e.preventDefault()
@@ -69,6 +74,8 @@ const UserDetails = () => {
       console.log(err)
     })
   }
+
+
 
   const classes = styles();
   return (
@@ -92,6 +99,9 @@ const UserDetails = () => {
                 {userBalance} ETH
               </Typography>
             </Grid>
+{/* 
+            button on click fires redeemBalance function */}
+            
             <Button
               onClick={redeemBalance}
               style={{

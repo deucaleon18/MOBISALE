@@ -55,6 +55,8 @@ const SinglePost = () => {
   useEffect(()=>{
 
 
+
+//for single post the url parameter is extracted and data is fetched from the backend
   const getPostDetails=async()=>{
   await axios.get(`/posts/${postId.id}`, {
     params: {
