@@ -158,11 +158,7 @@ const NewPost = () => {
 
               <Grid container items sx={{ padding: "10px" }}>
                 <TextField
-                  InputProps={{
-                    classes: {
-                      input: classes.multilineColor,
-                    },
-                  }}
+                  inputProps={{ style: { color: "#fff" } }}
                   name="title"
                   required
                   fullWidth
@@ -178,11 +174,7 @@ const NewPost = () => {
               </Grid>
               <Grid container items sx={{ padding: "10px" }}>
                 <TextField
-                  InputProps={{
-                    classes: {
-                      input: classes.multilineColor,
-                    },
-                  }}
+                  inputProps={{ style: { color: "#fff" } }}
                   name="description"
                   required
                   fullWidth
@@ -198,11 +190,7 @@ const NewPost = () => {
               </Grid>
               <Grid container items sx={{ padding: "10px" }}>
                 <TextField
-                  InputProps={{
-                    classes: {
-                      input: classes.multilineColor,
-                    },
-                  }}
+                  inputProps={{ style: { color: "#fff" } }}
                   name="features"
                   required
                   fullWidth
@@ -219,11 +207,7 @@ const NewPost = () => {
 
               <Grid container items sx={{ padding: "10px" }}>
                 <TextField
-                  InputProps={{
-                    classes: {
-                      input: classes.multilineColor,
-                    },
-                  }}
+                  inputProps={{ style: { color: "#fff" } }}
                   type="Number"
                   name="cost"
                   required

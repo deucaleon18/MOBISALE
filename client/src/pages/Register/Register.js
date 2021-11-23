@@ -144,20 +144,12 @@ const Register = () => {
               Upload Image
             </Button>
           </label>
-
-
-
         </Stack>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2} color="white">
             <Grid item xs={12}>
               <TextField
-             
-                InputProps={{
-                  classes: {
-                    input: classes.multilineColor,
-                  },
-                }}
+                inputProps={{ style: { color: "#fff" } }}
                 name="username"
                 required
                 fullWidth
@@ -174,11 +166,7 @@ const Register = () => {
 
             <Grid item xs={12}>
               <TextField
-                InputProps={{
-                  classes: {
-                    input: classes.multilineColor,
-                  },
-                }}
+                inputProps={{ style: { color: "#fff" } }}
                 required
                 fullWidth
                 id="email"
@@ -193,11 +181,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                InputProps={{
-                  classes: {
-                    input: classes.multilineColor,
-                  },
-                }}
+                inputProps={{ style: { color: "#fff" } }}
                 required
                 fullWidth
                 name="password"
@@ -213,11 +197,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                InputProps={{
-                  classes: {
-                    input: classes.multilineColor,
-                  },
-                }}
+                inputProps={{ style: { color: "#fff" } }}
                 required
                 fullWidth
                 name="paymentAccount"

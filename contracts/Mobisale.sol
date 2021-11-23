@@ -43,12 +43,23 @@ contract Mobisale {
         
         for(uint i=1;i<=userCount;i++){
             if(keccak256(bytes(users[i].username))==keccak256(bytes(_username))){
-                users[i].paymentAccount.transfer(users[i].balance);
+                require(users[i].balance>0);
+                users[i].paymentAccount.transfer((users[i].balance)*1000000000000000000);
+                users[i].balance=0;
             }
         }
        
     }
- 
+   
+   function returnUserBalance(string memory _username) public view returns(uint){
+         for(uint i=1;i<=userCount;i++){
+            if(keccak256(bytes(users[i].username))==keccak256(bytes(_username))){
+                return users[i].balance;
+            }
+        }
+       
+    }
+   
  function getContractBalance() external view returns(uint){
   return address(this).balance;
  }

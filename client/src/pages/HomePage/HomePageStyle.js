@@ -6,4 +6,11 @@ export const styles = makeStyles((theme) => ({
     width: "100%",
     display: "flex",
   },
+
+  mainContainer: {
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      flexDirection:"column"
+    },
+  },
 }));

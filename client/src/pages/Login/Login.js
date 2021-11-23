@@ -84,11 +84,7 @@ const Login = () => {
             sx={{ mt: 1 }}
           >
             <TextField
-              InputProps={{
-                classes: {
-                  input: classes.multilineColor,
-                },
-              }}
+              inputProps={{ style: { color: "#fff" } }}
               color="secondary"
               margin="normal"
               required
@@ -100,11 +96,7 @@ const Login = () => {
               autoFocus
             />
             <TextField
-              InputProps={{
-                classes: {
-                  input: classes.multilineColor,
-                },
-              }}
+              inputProps={{ style: { color: "#fff" } }}
               color="secondary"
               margin="normal"
               required

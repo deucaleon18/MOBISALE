@@ -1,4 +1,4 @@
-import { Button, Container } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import React,{useEffect,useState} from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -8,14 +8,17 @@ import { useParams } from "react-router";
 import axios from "axios"
 import useBasicFetch from "../../hooks/useBasicFetch";
 import { styles } from "./UserDetailsStyle";
-
+import Avatar from "@mui/material/Avatar";
 
 const UserDetails = () => {
  
   const username=useParams("username")
-  const [web3, account, contract, contractLoading] = useBasicFetch();
+  const [web3, account, contract,contractLoading] = useBasicFetch();
   const [userBalance,setUserBalance]=useState("")
   const [user,setUser]=useState("")
+  const [userUrl,setUserUrl]=useState("")
+  const [loading,setLoading]=useState("")
+
 
   useEffect(()=>{
 
@@ -30,18 +33,31 @@ const UserDetails = () => {
       })
       .then(async(res)=>{
         console.log(res)
-        setUser(res.data)
+        setUserUrl(`https://ipfs.infura.io/ipfs/${res.data.user.imageHash}`);
+        setUser(res.data.user)
+        setLoading(false)
 
-       
-      
-
+        await contract.methods.returnUserBalance(username.username).call()
+        .then((res)=>{
+          console.log(res.data)
+          setUserBalance(res.data)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+     
       })
       .catch((err)=>{
         console.log(err)
       })
     }
+
+    getUserDetails()
   },[])
  
+//  useEffect(()=>{
+
+//  })
 
   const redeemBalance=async(e)=>{
     e.preventDefault()
@@ -59,7 +75,35 @@ const UserDetails = () => {
     <>
       <Container className={classes.root}>
         <CssBaseline />
-        <Button onClick={redeemBalance}style={{ background: "#0085f1",color:"white"}}>REDEEM BALANCE</Button>
+        <Box>
+          <Grid container>
+            <Grid item>
+              {!loading ? (
+                <>
+                  <Avatar src={userUrl} alt=""></Avatar>
+                  <Typography variant="h5" style={{ color: "white" }}>
+                    {user.username}
+                  </Typography>
+                </>
+              ) : null}
+            </Grid>
+            <Grid item>
+              <Typography variant="h5" style={{ color: "white" }}>
+                {userBalance} ETH
+              </Typography>
+            </Grid>
+            <Button
+              onClick={redeemBalance}
+              style={{
+                background: "#0085f1",
+                color: "white",
+                margin: "auto",
+              }}
+            >
+              REDEEM BALANCE
+            </Button>
+          </Grid>
+        </Box>
       </Container>
     </>
   );

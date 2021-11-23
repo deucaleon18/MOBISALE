@@ -13,7 +13,7 @@ const HomePage = () => {
     <>
       <Container className={classes.root}>
         <CssBaseline />
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} className={classes.mainContainer}>
           <Grid item sx={{ padding: 4 }}>
             <img
               style={{ maxWidth: "100%" }}
@@ -31,7 +31,7 @@ const HomePage = () => {
             </Typography>
             <Typography
               variant="h6"
-              sx={{ textAlign: "center", marginBottom: 2,fontWeight:800}}
+              sx={{ textAlign: "center", marginBottom: 2, fontWeight: 800 }}
               color="secondary"
             >
               Buy and sell latest mobile applications
@@ -39,9 +39,16 @@ const HomePage = () => {
             <Typography variant="h6" sx={{ textAlign: "center" }} color="white">
               Fast Easy Secure
             </Typography>
-            <Button style={{backgroundColor:"#0085f1",color:"white"}} >
-              START NOW
-            </Button>
+            <Grid item style={{display:"flex",justifyContent:"center"}}>
+              <Button
+                style={{ backgroundColor: "#0085f1", color: "white" }}
+                onClick={() => {
+                  window.location.href = "/login";
+                }}
+              >
+                START NOW
+              </Button>
+            </Grid>
           </Grid>
         </Box>
       </Container>

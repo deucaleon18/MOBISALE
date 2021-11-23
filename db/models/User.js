@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   },
  imageHash:{
    type:String,
-   required:false
+   required:true
  },
  paymentAccount:{
    type:String,

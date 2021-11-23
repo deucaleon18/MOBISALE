@@ -84,7 +84,7 @@ const MarketPlace = () => {
                       return (
                         <>
                           <Grid xs={6} items>
-                            <Paper color="#252953" padding={2}>
+                            <Paper elevation={1}color="#252953" padding={2}>
                               <img
                                 style={{ maxWidth: "100%" }}
                                 src={url}
